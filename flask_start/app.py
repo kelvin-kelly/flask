@@ -1,8 +1,12 @@
-from flask import Flask,render_template, request, redirect, url_for
-from models import User, db
-  
 
-app = Flask(__name__)  
+
+from flask import render_template, request, redirect, url_for  
+
+from models import User  
+
+from config import app, db  
+
+  
   
 
 
@@ -11,46 +15,28 @@ def index():
     return render_template('index.html')
 
 @app.route('/')
-@app.route('/signup/', methods=['POST', 'GET'])  
-def signup():  
+@app.route('/signup/', methods=['POST', 'GET'])
+def signup():
+    if request.method == 'POST':
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        email = request.form.get('email')
+        password = request.form.get('password')
 
-    if request.method == 'POST':  
+        # Validate form data
+        if not fname or not lname or not email or not password:
+            return render_template('signup.html', error='Please fill in all fields')
 
-        fname = request.form['fname']  
+        # Create a new User instance
+        user = User(fname=fname, lname=lname, email=email, password=password)
 
-        lname = request.form['lname']  
+        # Add the user to the database
+        db.session.add(user)
+        db.session.commit()
 
-        email = request.form['email']  
+        return redirect(url_for('index'))
 
-        password = request.form['password']  
-
-  
-
-        # Validate form data  
-
-        if not fname or not lname or not email or not password:  
-
-            return render_template('signup.html', error='Please fill in all fields')  
-
-  
-
-        # Create a new User instance  
-
-        user = User(fname=fname, lname=lname, email=email, password=password)  
-
-  
-
-        # Add the user to the database  
-
-        db.session.add(user)  
-
-        db.session.commit()  
-
-  
-
-        return redirect(url_for('index'))  
-
-    return render_template('signup.html')  
+    return render_template('signup.html')
 
   
 

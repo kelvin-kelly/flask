@@ -3,7 +3,7 @@
 {% block title %}Signup | Anime Hub{% endblock %}
 
 {% block content %}
-<form action="/submit" method="POST">
+  <form action="{{ url_for('signup') }}" method="POST">
   <div class="row mb-3">
     <label for="fname" class="col-sm-2 col-form-label">First Name:</label>
     <div class="col-sm-4">
