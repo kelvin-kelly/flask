@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup | Anime Hub{% endblock %}
+
+{% block content %}
+<form action="/submit" method="POST">
+  <div class="row mb-3">
+    <label for="fname" class="col-sm-2 col-form-label">First Name:</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fname" name="fname" />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="lname" class="col-sm-2 col-form-label">Last Name:</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="lname" name="lname" />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" id="email" name="email" />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Password:</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="inputPassword3" name="password" />
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-2"></div> <!-- Offset column for button alignment -->
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
